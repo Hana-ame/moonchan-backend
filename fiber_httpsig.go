@@ -65,7 +65,11 @@ func CheckHttpsig(c *fiber.Ctx) (err error) {
 	var pubKey crypto.PublicKey = pk
 	// The verifier will verify the Digest in addition to the HTTP signature
 	err = verifier.Verify(pubKey, algo)
-
-	// log.Println("err", err)
-	return err
+	if err != nil {
+		log.Println("err", err)
+		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+			"error": err.Error(),
+		})
+	}
+	return c.Next()
 }

@@ -3,11 +3,12 @@
 - [ ] ActivePub api
   - [x] webfinger
   - [ ] httpsign
-    - [-] inbound
+    - [x] inbound
       - [ ] did it check the body's hash?
       - [ ] db: make a cache
     - [ ] outbound
     - [ ] hint: write some test cases...? or connect to a fedi server
+    - [ ] actor, should be a special user(misskey) or actor(mastodon)?
   - [ ] get user info
   - [ ] follow
     - [ ] check if follow succeeded
@@ -19,6 +20,7 @@
   - [ ] notifycation
   - [ ] block
   - [ ] outbound
+    - [ ] TIMEOUT!!!
     - [ ] httpsign
     - [ ] get user
     - [ ] post messages
@@ -28,10 +30,14 @@
 - [ ] user interface api
   - [ ] account
     - [ ] create account
-  - [ ] profile
-  - [ ] timeline
-  - [ ] notifications
-  - [ ] ...
+    - [ ] login
+    - [ ] annonymous?
+  - [ ] outbound
+    - [ ] profile
+    - [ ] timeline
+    - [ ] notifications
+    - [ ] ...
+  - [ ] inbound
 - [ ] network?
   - [x] cloudflare tunnel
     - [ ] does it cost money?
