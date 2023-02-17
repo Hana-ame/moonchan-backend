@@ -38,9 +38,10 @@
     - [ ] notifications
     - [ ] ...
   - [ ] inbound
-- [ ] network?
-  - [x] cloudflare tunnel
-    - [ ] does it cost money?
-    - [ ] request by proxy.
+
+## network?
+- [x] cloudflare tunnel
+  - [ ] does it cost money?
+  - [ ] request by proxy.
 
 frontend is in another repository
