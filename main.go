@@ -1,17 +1,20 @@
 package main
 
 import (
+	"log"
+
 	"github.com/Hana-ame/moonchan-backend/webfinger"
 	"github.com/gofiber/fiber/v2"
 )
 
 func main() {
-	webfinger.SetDomain("moonchan.xyz")
+	webfinger.SetDomain("n.tsukishima.top")
 
 	app := fiber.New()
 
 	app.Mount(webfinger.WebFingerPath, webfingerApp())
+	app.Use("/users/", CheckHttpsig)
 
-	app.Listen(":3000")
+	log.Fatal(app.Listen("127.0.1.1:3000"))
 
 }

@@ -2,6 +2,7 @@ package main
 
 import (
 	"crypto"
+	"log"
 	"net/http"
 	"net/url"
 
@@ -11,6 +12,8 @@ import (
 )
 
 func CheckHttpsig(c *fiber.Ctx) (err error) {
+	// log.Println("CheckHttpsig")
+
 	reqHeaders := c.GetReqHeaders()
 	headers := http.Header{}
 	for k, v := range reqHeaders {
@@ -18,7 +21,9 @@ func CheckHttpsig(c *fiber.Ctx) (err error) {
 		headers.Add(k, v)
 	}
 
-	host := c.Hostname()
+	// should not be write as this, edit it later.
+	// host := reqHeaders["Host"] // not used, the proxy rewrite the Host
+	host := c.Hostname() // this is also from Headers
 
 	r := c.Route()
 	method := r.Method
@@ -26,6 +31,7 @@ func CheckHttpsig(c *fiber.Ctx) (err error) {
 	originalURL := c.OriginalURL()
 	url, err := url.ParseRequestURI(originalURL)
 	if err != nil {
+		log.Println("ParseRequestURI", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
 		})
@@ -37,8 +43,11 @@ func CheckHttpsig(c *fiber.Ctx) (err error) {
 		Method: method,
 		URL:    url,
 	}
+	// log.Println(ir)
+
 	verifier, err := httpsig.NewVerifier(ir)
 	if err != nil {
+		log.Println("NewVerifier", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
 		})
@@ -47,6 +56,7 @@ func CheckHttpsig(c *fiber.Ctx) (err error) {
 	pubKeyId := verifier.KeyId()
 	pk, err := db.GetPublicKeyById(pubKeyId)
 	if err != nil {
+		log.Println("GetPublicKeyById", err)
 		return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
 			"error": err.Error(),
 		})
@@ -54,5 +64,8 @@ func CheckHttpsig(c *fiber.Ctx) (err error) {
 	var algo httpsig.Algorithm = httpsig.RSA_SHA256
 	var pubKey crypto.PublicKey = pk
 	// The verifier will verify the Digest in addition to the HTTP signature
-	return verifier.Verify(pubKey, algo)
+	err = verifier.Verify(pubKey, algo)
+
+	// log.Println("err", err)
+	return err
 }
