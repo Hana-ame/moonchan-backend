@@ -19,6 +19,8 @@
     - [ ] edit message
   - [ ] notifycation
   - [ ] block
+  - [ ] vote
+    - [ ] what it does?
   - [ ] outbound
     - [ ] TIMEOUT!!!
     - [ ] httpsign
@@ -31,17 +33,25 @@
   - [ ] account
     - [ ] create account
     - [ ] login
-    - [ ] annonymous?
-  - [ ] outbound
-    - [ ] profile
-    - [ ] timeline
-    - [ ] notifications
-    - [ ] ...
-  - [ ] inbound
+    - [ ] annonymous?  
+  - [ ] profile
+  - [ ] timeline
+  - [ ] notifications
+  - [ ] ...
+  - [ ] posts
+- [ ] db
+  - [ ] gorm
+    - go get -u gorm.io/gorm
+    - ...
+  - [ ] user
+    - [ ] create a user
+      - [ ] username, passwd, email, private key, user_object.
 
 ## network?
+
 - [x] cloudflare tunnel
-  - [ ] does it cost money?
+  - [x] does it cost money?
+    - no
   - [ ] request by proxy.
 
 frontend is in another repository
