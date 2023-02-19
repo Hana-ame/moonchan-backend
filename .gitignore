@@ -2,3 +2,4 @@ moonchan-backend
 moonchan-backend.exe
 
 code.sh
+*.db

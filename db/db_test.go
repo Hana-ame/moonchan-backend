@@ -9,7 +9,7 @@ import (
 )
 
 func TestSqlite(t *testing.T) {
-	db, err := gorm.Open(sqlite.Open("gorm.db"), &gorm.Config{})
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
 	if err != nil {
 		t.Error(err)
 	}

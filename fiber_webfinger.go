@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/Hana-ame/moonchan-backend/db"
+	"github.com/Hana-ame/moonchan-backend/utils"
 	"github.com/Hana-ame/moonchan-backend/webfinger"
 
 	"github.com/gofiber/fiber/v2"
@@ -13,7 +14,7 @@ func webfingerApp() *fiber.App {
 	app.All("", func(c *fiber.Ctx) error {
 		acct := c.Query("resource")
 
-		username, domain := webfinger.ParseAcct(acct)
+		username, domain := utils.ParseAcct(acct)
 
 		if !webfinger.CheckDomain(domain) {
 			return c.Status(fiber.StatusUnprocessableEntity).JSON(fiber.Map{

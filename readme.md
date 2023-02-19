@@ -42,7 +42,9 @@
 - [ ] db
   - [ ] gorm
     - go get -u gorm.io/gorm
-    - ...
+    - compile error, so install gcc
+      - msys2... sucks.
+      - 
   - [ ] user
     - [ ] create a user
       - [ ] username, passwd, email, private key, user_object.

@@ -2,7 +2,6 @@ package webfinger
 
 import (
 	"fmt"
-	"strings"
 )
 
 const WebFingerPath = "/.well-known/webfinger"
@@ -13,19 +12,6 @@ var domain = "moonchan.xyz"
 
 func SetDomain(_domain string) {
 	domain = _domain
-}
-
-func ParseAcct(acct string) (username string, domain string) {
-	// if strings.HasPrefix(acct, "acct:") {
-	// 	acct = acct[5:]
-	// }
-	acct = strings.TrimPrefix(acct, "acct:")
-
-	arr := strings.Split(acct, "@")
-	if len(arr) == 2 {
-		return arr[0], arr[1]
-	}
-	return acct, ""
 }
 
 func CheckDomain(_domain string) bool {
